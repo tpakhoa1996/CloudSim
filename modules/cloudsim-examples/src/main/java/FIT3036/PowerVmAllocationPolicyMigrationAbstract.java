@@ -334,7 +334,6 @@ public abstract class PowerVmAllocationPolicyMigrationAbstract extends PowerVmAl
 			Set<? extends Host> excludedHosts) {
 		List<Map<String, Object>> migrationMap = new LinkedList<Map<String, Object>>();
 		PowerVmList.sortByCpuUtilization(vmsToMigrate);
-		Collections.reverse(vmsToMigrate);
 		for (Vm vm : vmsToMigrate) {
 			PowerHost allocatedHost = findHostForVm(vm, excludedHosts);
 			if (allocatedHost != null) {
@@ -350,6 +349,32 @@ public abstract class PowerVmAllocationPolicyMigrationAbstract extends PowerVmAl
 		return migrationMap;
 	}
 
+    protected List<Map<String, Object>> getNewVmPlacement1(
+            List<? extends Vm> vmsToMigrate,
+            Set<? extends Host> excludedHosts) {
+        List<Map<String, Object>> migrationMap = new LinkedList<Map<String, Object>>();
+        List<PowerHost> hosts = this.<PowerHost> getHostList();
+
+        PowerVmList.sortByCpuUtilization(vmsToMigrate);
+        Collections.reverse(vmsToMigrate);
+
+        sortHostsByCpuUtilization(hosts);
+        // Need to implement
+        return migrationMap;
+    }
+
+
+    public static <T extends Vm> void sortHostsByCpuUtilization(List<PowerHost> hosts) {
+        Collections.sort(hosts, new Comparator<PowerHost>() {
+
+            @Override
+            public int compare(PowerHost a, PowerHost b) throws ClassCastException {
+                Double aUtilization = a.getUtilizationOfCpu();
+                Double bUtilization = b.getUtilizationOfCpu();
+                return aUtilization.compareTo(bUtilization);
+            }
+        });
+    }
 	/**
 	 * Gets the new vm placement from under utilized host.
 	 * 
