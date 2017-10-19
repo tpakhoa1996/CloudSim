@@ -3,8 +3,8 @@ package org.cloudbus.cloudsim.examples.power.planetlab;
 import java.io.IOException;
 
 /**
- * A simulation of a heterogeneous power aware data center that applies the Local Regression (LR) VM
- * allocation policy and Minimum Migration Time (MMT) VM selection policy.
+ * A simulation of a heterogeneous power aware data center that applies the Median Absolute
+ * Deviation (MAD) VM allocation policy and Minimum Migration Time (MMT) VM selection policy.
  * 
  * This example uses a real PlanetLab workload: 20110303.
  * 
@@ -21,7 +21,7 @@ import java.io.IOException;
  * @author Anton Beloglazov
  * @since Jan 5, 2012
  */
-public class LrMmt {
+public class MadMmt_MU {
 
 	/**
 	 * The main method.
@@ -32,12 +32,12 @@ public class LrMmt {
 	public static void main(String[] args) throws IOException {
 		boolean enableOutput = true;
 		boolean outputToFile = false;
-		String inputFolder = LrMmt.class.getClassLoader().getResource("workload/planetlab").getPath();
+		String inputFolder = MadMmt_MU.class.getClassLoader().getResource("workload/planetlab").getPath();
 		String outputFolder = "output";
 		String workload = "20110420"; // PlanetLab workload
-		String vmAllocationPolicy = "lr"; // Local Regression (LR) VM allocation policy
+		String vmAllocationPolicy = "mad_mu"; // Median Absolute Deviation (MAD) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
-		String parameter = "1.2"; // the safety parameter of the LR policy
+		String parameter = "2.5"; // the safety parameter of the MAD policy
 
 		new PlanetLabRunner(
 				enableOutput,

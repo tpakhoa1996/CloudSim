@@ -33,8 +33,8 @@ public class LrMmt_MU {
 		boolean enableOutput = true;
 		boolean outputToFile = false;
 		String inputFolder = LrMmt_MU.class.getClassLoader().getResource("workload/planetlab").getPath();
-		String outputFolder = "output";
-		String workload = "20110303"; // PlanetLab workload
+		String outputFolder = "/home/brian/MonashProgression/FIT3036";
+		String workload = "20110420"; // PlanetLab workload
 		String vmAllocationPolicy = "lr_mu"; // Local Regression (LR) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
 		String parameter = "1.2"; // the safety parameter of the LR policy

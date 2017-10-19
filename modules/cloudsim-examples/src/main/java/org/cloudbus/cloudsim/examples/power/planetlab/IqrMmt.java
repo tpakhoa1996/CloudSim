@@ -34,7 +34,7 @@ public class IqrMmt {
 		boolean outputToFile = false;
 		String inputFolder = IqrMmt.class.getClassLoader().getResource("workload/planetlab").getPath();
 		String outputFolder = "output";
-		String workload = "20110303"; // PlanetLab workload
+		String workload = "20110420"; // PlanetLab workload
 		String vmAllocationPolicy = "iqr"; // Inter Quartile Range (IQR) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
 		String parameter = "1.5"; // the safety parameter of the IQR policy

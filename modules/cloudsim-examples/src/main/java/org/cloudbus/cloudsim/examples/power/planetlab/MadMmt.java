@@ -34,7 +34,7 @@ public class MadMmt {
 		boolean outputToFile = false;
 		String inputFolder = MadMmt.class.getClassLoader().getResource("workload/planetlab").getPath();
 		String outputFolder = "output";
-		String workload = "20110303"; // PlanetLab workload
+		String workload = "20110420"; // PlanetLab workload
 		String vmAllocationPolicy = "mad"; // Median Absolute Deviation (MAD) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
 		String parameter = "2.5"; // the safety parameter of the MAD policy

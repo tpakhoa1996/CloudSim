@@ -16,15 +16,15 @@ import org.cloudbus.cloudsim.power.*;
 
 /**
  * The Class RunnerAbstract.
- * 
+ *
  * If you are using any algorithms, policies or workload included in the power package, please cite
  * the following paper:
- * 
+ *
  * Anton Beloglazov, and Rajkumar Buyya, "Optimal Online Deterministic Algorithms and Adaptive
  * Heuristics for Energy and Performance Efficient Dynamic Consolidation of Virtual Machines in
  * Cloud Data Centers", Concurrency and Computation: Practice and Experience (CCPE), Volume 24,
  * Issue 13, Pages: 1397-1420, John Wiley & Sons, Ltd, New York, USA, 2012
- * 
+ *
  * @author Anton Beloglazov
  */
 public abstract class RunnerAbstract {
@@ -46,7 +46,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Run.
-	 * 
+	 *
 	 * @param enableOutput the enable output
 	 * @param outputToFile the output to file
 	 * @param inputFolder the input folder
@@ -88,7 +88,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Inits the log output.
-	 * 
+	 *
 	 * @param enableOutput the enable output
 	 * @param outputToFile the output to file
 	 * @param outputFolder the output folder
@@ -129,14 +129,14 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Inits the simulation.
-	 * 
+	 *
 	 * @param inputFolder the input folder
 	 */
 	protected abstract void init(String inputFolder);
 
 	/**
 	 * Starts the simulation.
-	 * 
+	 *
 	 * @param experimentName the experiment name
 	 * @param outputFolder the output folder
 	 * @param vmAllocationPolicy the vm allocation policy
@@ -183,7 +183,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Gets the experiment name.
-	 * 
+	 *
 	 * @param args the args
 	 * @return the experiment name
 	 */
@@ -203,7 +203,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Gets the vm allocation policy.
-	 * 
+	 *
 	 * @param vmAllocationPolicyName the vm allocation policy name
 	 * @param vmSelectionPolicyName the vm selection policy name
 	 * @param parameterName the parameter name
@@ -232,12 +232,32 @@ public abstract class RunnerAbstract {
 					vmSelectionPolicy,
 					parameter,
 					fallbackVmSelectionPolicy);
+		} else if (vmAllocationPolicyName.equals("iqr_mu")) {
+			PowerVmAllocationPolicyMigrationAbstract fallbackVmSelectionPolicy = new PowerVmAllocationPolicyMigrationStaticThreshold(
+					hostList,
+					vmSelectionPolicy,
+					0.7);
+			vmAllocationPolicy = new PowerVmAllocationPolicyMigrationInterQuartileRange_MU(
+					hostList,
+					vmSelectionPolicy,
+					parameter,
+					fallbackVmSelectionPolicy);
 		} else if (vmAllocationPolicyName.equals("mad")) {
 			PowerVmAllocationPolicyMigrationAbstract fallbackVmSelectionPolicy = new PowerVmAllocationPolicyMigrationStaticThreshold(
 					hostList,
 					vmSelectionPolicy,
 					0.7);
 			vmAllocationPolicy = new PowerVmAllocationPolicyMigrationMedianAbsoluteDeviation(
+					hostList,
+					vmSelectionPolicy,
+					parameter,
+					fallbackVmSelectionPolicy);
+		} else if (vmAllocationPolicyName.equals("mad_mu")) {
+			PowerVmAllocationPolicyMigrationAbstract fallbackVmSelectionPolicy = new PowerVmAllocationPolicyMigrationStaticThreshold(
+					hostList,
+					vmSelectionPolicy,
+					0.7);
+			vmAllocationPolicy = new PowerVmAllocationPolicyMigrationMedianAbsoluteDeviation_MU(
 					hostList,
 					vmSelectionPolicy,
 					parameter,
@@ -275,6 +295,17 @@ public abstract class RunnerAbstract {
 					parameter,
 					Constants.SCHEDULING_INTERVAL,
 					fallbackVmSelectionPolicy);
+		} else if (vmAllocationPolicyName.equals("lrr_mu")) {
+			PowerVmAllocationPolicyMigrationAbstract fallbackVmSelectionPolicy = new PowerVmAllocationPolicyMigrationStaticThreshold(
+					hostList,
+					vmSelectionPolicy,
+					0.7);
+			vmAllocationPolicy = new PowerVmAllocationPolicyMigrationLocalRegressionRobust_MU(
+					hostList,
+					vmSelectionPolicy,
+					parameter,
+					Constants.SCHEDULING_INTERVAL,
+					fallbackVmSelectionPolicy);
 		} else if (vmAllocationPolicyName.equals("thr")) {
 			vmAllocationPolicy = new PowerVmAllocationPolicyMigrationStaticThreshold(
 					hostList,
@@ -291,7 +322,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Gets the vm selection policy.
-	 * 
+	 *
 	 * @param vmSelectionPolicyName the vm selection policy name
 	 * @return the vm selection policy
 	 */
@@ -315,7 +346,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Sets the enable output.
-	 * 
+	 *
 	 * @param enableOutput the new enable output
 	 */
 	public void setEnableOutput(boolean enableOutput) {
@@ -324,7 +355,7 @@ public abstract class RunnerAbstract {
 
 	/**
 	 * Checks if is enable output.
-	 * 
+	 *
 	 * @return true, if is enable output
 	 */
 	public boolean isEnableOutput() {

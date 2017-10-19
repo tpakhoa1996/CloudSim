@@ -34,7 +34,7 @@ public class LrrMmt {
 		boolean outputToFile = false;
 		String inputFolder = LrrMmt.class.getClassLoader().getResource("workload/planetlab").getPath();
 		String outputFolder = "/home/brian/MonashProgression/FIT3036/output_LrrMmt";
-		String workload = "20110303"; // PlanetLab workload
+		String workload = "20110403"; // PlanetLab workload
 		String vmAllocationPolicy = "lrr"; // Local Regression Robust (LRR) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
 		String parameter = "1.2"; // the safety parameter of the LRR policy
