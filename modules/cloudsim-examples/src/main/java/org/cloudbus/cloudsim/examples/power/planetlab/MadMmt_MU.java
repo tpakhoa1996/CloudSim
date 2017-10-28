@@ -31,23 +31,26 @@ public class MadMmt_MU {
 	 */
 	public static void main(String[] args) throws IOException {
 		boolean enableOutput = true;
-		boolean outputToFile = false;
+		boolean outputToFile = true;
 		String inputFolder = MadMmt_MU.class.getClassLoader().getResource("workload/planetlab").getPath();
 		String outputFolder = "output";
-		String workload = "20110420"; // PlanetLab workload
 		String vmAllocationPolicy = "mad_mu"; // Median Absolute Deviation (MAD) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
 		String parameter = "2.5"; // the safety parameter of the MAD policy
 
-		new PlanetLabRunner(
-				enableOutput,
-				outputToFile,
-				inputFolder,
-				outputFolder,
-				workload,
-				vmAllocationPolicy,
-				vmSelectionPolicy,
-				parameter);
+		String[] workloads = {"20110303", "20110306", "20110309", "20110322", "20110325", "20110403", "20110409", "20110411", "20110412", "20110420"};
+
+		for (String workload : workloads) {
+			new PlanetLabRunner(
+					enableOutput,
+					outputToFile,
+					inputFolder,
+					outputFolder,
+					workload,
+					vmAllocationPolicy,
+					vmSelectionPolicy,
+					parameter);
+		}
 	}
 
 }

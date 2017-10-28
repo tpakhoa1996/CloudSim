@@ -306,6 +306,7 @@ public abstract class PowerVmAllocationPolicyMigrationAbstract_MU extends PowerV
             Set<? extends Host> excludedHosts) {
         List<Map<String, Object>> migrationMap = new LinkedList<Map<String, Object>>();
         PowerVmList.sortByCpuUtilization(vmsToMigrate);
+        Collections.reverse(vmsToMigrate);
         for (Vm vm : vmsToMigrate) {
             PowerHost allocatedHost = findHostForVm(vm, excludedHosts);
             if (allocatedHost != null) {
@@ -333,6 +334,7 @@ public abstract class PowerVmAllocationPolicyMigrationAbstract_MU extends PowerV
             Set<? extends Host> excludedHosts) {
         List<Map<String, Object>> migrationMap = new LinkedList<Map<String, Object>>();
         PowerVmList.sortByCpuUtilization(vmsToMigrate);
+        Collections.reverse(vmsToMigrate);
         for (Vm vm : vmsToMigrate) {
             PowerHost allocatedHost = findHostForVm(vm, excludedHosts);
             if (allocatedHost != null) {

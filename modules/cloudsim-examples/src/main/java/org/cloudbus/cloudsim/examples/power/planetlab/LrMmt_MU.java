@@ -31,23 +31,26 @@ public class LrMmt_MU {
 	 */
 	public static void main(String[] args) throws IOException {
 		boolean enableOutput = true;
-		boolean outputToFile = false;
+		boolean outputToFile = true;
 		String inputFolder = LrMmt_MU.class.getClassLoader().getResource("workload/planetlab").getPath();
 		String outputFolder = "/home/brian/MonashProgression/FIT3036";
-		String workload = "20110420"; // PlanetLab workload
 		String vmAllocationPolicy = "lr_mu"; // Local Regression (LR) VM allocation policy
 		String vmSelectionPolicy = "mmt"; // Minimum Migration Time (MMT) VM selection policy
 		String parameter = "1.2"; // the safety parameter of the LR policy
 
-		new PlanetLabRunner(
-				enableOutput,
-				outputToFile,
-				inputFolder,
-				outputFolder,
-				workload,
-				vmAllocationPolicy,
-				vmSelectionPolicy,
-				parameter);
+		String[] workloads = {"20110303", "20110306", "20110309", "20110322", "20110325", "20110403", "20110409", "20110411", "20110412", "20110420"};
+
+		for (String workload : workloads) {
+			new PlanetLabRunner(
+					enableOutput,
+					outputToFile,
+					inputFolder,
+					outputFolder,
+					workload,
+					vmAllocationPolicy,
+					vmSelectionPolicy,
+					parameter);
+		}
 	}
 
 }
